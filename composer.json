@@ -1,0 +1,28 @@
+{
+    "name": "level51/silverstripe-find-http-action",
+    "version": "0.1.0",
+    "description": "Finds actions by HTTP method used on the request.",
+    "homepage": "https://github.com/level51/silverstripe-find-http-action",
+    "keywords": [
+        "silverstripe",
+        "silverstripe-trait",
+        "HTTP",
+        "CRUD"
+    ],
+    "type": "silverstripe-vendormodule",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Julian Scheuchenzuber",
+            "email": "js@lvl51.de"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/level51/silverstripe-find-http-action"
+    },
+    "autoload": {
+        "psr-4": {
+            "Level51\\FindHTTPAction\\": "src/"
+        }
+    }
+}
