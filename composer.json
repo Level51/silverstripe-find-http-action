@@ -1,6 +1,6 @@
 {
     "name": "level51/silverstripe-find-http-action",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Finds actions by HTTP method used on the request.",
     "homepage": "https://github.com/level51/silverstripe-find-http-action",
     "keywords": [
