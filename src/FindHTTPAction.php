@@ -39,27 +39,29 @@ trait FindHTTPAction {
 
                     $method = $request->httpMethod();
                     if ($request->match($rule, true)) {
-                        if (isset($_REQUEST['debug_request'])) {
-                            $class = static::class;
-                            $latestParams = var_export($request->latestParams(), true);
-                            $actionInfo = is_array($action) ? $action[$method] . ' (' . $method . ')' : $action;
-                            Debug::message(
-                                "Rule '{$rule}' matched to action '{$actionInfo}' on {$class}. " . "Latest request params: {$latestParams}"
-                            );
-                        }
-
                         // Check if action is provided as array with HTTP method => action mapping
-                        if (is_array($action) && array_key_exists($method, $action)) {
+                        if (is_array($action)) {
+                            if (array_key_exists($method, $action)) {
+                                if (isset($_REQUEST['debug_request'])) {
+                                    $class = static::class;
+                                    $latestParams = var_export($request->latestParams(), true);
+                                    $actionInfo = is_array($action) ? $action[$method] . ' (' . $method . ')' : $action;
+                                    Debug::message(
+                                        "Rule '{$rule}' matched to action '{$actionInfo}' on {$class}. " . "Latest request params: {$latestParams}"
+                                    );
+                                }
+
+                                return [
+                                    'rule'   => $rule,
+                                    'action' => $action[$method]
+                                ];
+                            }
+                        } else {
                             return [
                                 'rule'   => $rule,
-                                'action' => $action[$method]
+                                'action' => $action,
                             ];
                         }
-
-                        return [
-                            'rule'   => $rule,
-                            'action' => $action,
-                        ];
                     }
                 }
             }
