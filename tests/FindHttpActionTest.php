@@ -11,7 +11,7 @@ use SilverStripe\Dev\TestOnly;
 
 class FindHttpActionTest extends SapphireTest {
 
-    protected function setUp() {
+    protected function setUp(): void {
         parent::setUp();
 
         Config::modify()->set(Director::class, 'rules', [

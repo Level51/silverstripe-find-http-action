@@ -5,7 +5,7 @@ namespace Level51\FindHTTPAction;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\Debug;
-use SilverStripe\View\ViewableData;
+use SilverStripe\Model\ModelData;
 
 /**
  * Finds actions by HTTP method used on the request.
@@ -25,8 +25,8 @@ trait FindHTTPAction {
     protected function findAction($request) {
         $handlerClass = static::class;
 
-        // We stop after RequestHandler; in other words, at ViewableData
-        while ($handlerClass && $handlerClass != ViewableData::class) {
+        // We stop after RequestHandler; in other words, at ModelData
+        while ($handlerClass && $handlerClass != ModelData::class) {
             $urlHandlers = Config::inst()->get($handlerClass, 'url_handlers', Config::UNINHERITED);
 
             if ($urlHandlers) {
@@ -66,7 +66,7 @@ trait FindHTTPAction {
                 }
             }
 
-            $handlerClass = get_parent_class($handlerClass);
+            $handlerClass = get_parent_class($handlerClass ?? '');
         }
 
         return null;
